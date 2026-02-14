@@ -1,0 +1,43 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "stobo"
+version = "0.3.5"
+description = "Stobo CLI — AI-powered SEO/AEO audit tool"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{name = "Stobo", email = "hello@trystobo.com"}]
+keywords = ["seo", "aeo", "audit", "ai", "cli", "content-optimization"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Topic :: Internet :: WWW/HTTP",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    "typer[all]>=0.9.0",
+    "httpx>=0.27.0",
+    "rich>=13.0.0",
+    "pydantic>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "respx>=0.21.0",
+]
+
+[project.urls]
+Homepage = "https://trystobo.com"
+Documentation = "https://trystobo.com"
+Repository = "https://github.com/stobo-app/stobo-cli"
+Issues = "https://github.com/stobo-app/stobo-cli/issues"
+
+[project.scripts]
+stobo = "stobo.cli:app"
