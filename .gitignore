@@ -7,3 +7,9 @@ build/
 .pytest_cache/
 .ruff_cache/
 .env
+.env.*
+.DS_Store
+*.log
+*.pem
+*.key
+.claude/
