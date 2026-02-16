@@ -1,15 +1,20 @@
-__pycache__/
-*.pyc
-*.egg-info/
+# Build artifacts
 dist/
 build/
-.venv/
+*.egg-info/
+
+# Python
+__pycache__/
+*.pyc
 .pytest_cache/
-.ruff_cache/
+.venv/
+
+# Environment
 .env
 .env.*
+
+# OS
 .DS_Store
-*.log
-*.pem
-*.key
+
+# Claude
 .claude/

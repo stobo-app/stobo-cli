@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "stobo"
-version = "0.3.5"
+version = "0.3.7"
 description = "Stobo CLI — AI-powered SEO/AEO audit tool"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -37,7 +37,6 @@ dev = [
 Homepage = "https://trystobo.com"
 Documentation = "https://trystobo.com"
 Repository = "https://github.com/stobo-app/stobo-cli"
-Issues = "https://github.com/stobo-app/stobo-cli/issues"
 
 [project.scripts]
 stobo = "stobo.cli:app"

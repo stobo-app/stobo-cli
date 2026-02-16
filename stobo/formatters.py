@@ -155,7 +155,7 @@ def format_site_audit_result(data: dict) -> None:
         seo_grade = seo.get("grade", "?")
         seo_color = GRADE_COLORS.get(seo_grade, "white")
         seo_pts = seo.get("total_points", 0)
-        seo_max = seo.get("max_points", 335)
+        seo_max = seo.get("max_points", 380)
         console.print(
             f"\n[bold]SEO Audit[/] — [{seo_color}]{seo_grade}[/]"
             f" ({seo_pts}/{seo_max} points)"

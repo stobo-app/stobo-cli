@@ -18,7 +18,9 @@ stobo audit site https://example.com
 stobo audit run https://example.com/blog/my-post
 
 # Authenticate for paid features
-stobo auth login sk_your_api_key
+stobo auth login
+# Or non-interactively:
+stobo auth login --api-key sk_your_api_key
 
 # Extract brand voice (500 credits)
 stobo tone extract https://blog.example.com
@@ -61,7 +63,7 @@ stobo --json audit site https://example.com
 
 | Command | Description |
 |---------|-------------|
-| `stobo auth login <key>` | Save and validate API key |
+| `stobo auth login` | Save and validate API key (prompts securely) |
 | `stobo auth status` | Show current auth status |
 | `stobo auth logout` | Clear stored API key |
 | `stobo credits` | Check credit usage and balance |
@@ -93,7 +95,7 @@ stobo --json audit site https://example.com
 
 1. Sign up at [trystobo.com](https://trystobo.com)
 2. Go to Settings > API Keys
-3. Create a new key: `stobo auth login sk_your_key`
+3. Create a new key: `stobo auth login`
 
 ## License
 

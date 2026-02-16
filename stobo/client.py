@@ -58,25 +58,31 @@ def _raise_for_status(resp: httpx.Response) -> None:
 
 
 def normalize_url(url: str) -> str:
-    """Prepend https:// if no scheme is present."""
+    """Prepend https:// if no scheme is present. Reject non-HTTP schemes."""
     url = url.strip()
-    if url and not url.startswith(("http://", "https://")):
-        url = f"https://{url}"
-    return url
+    if not url:
+        return url
+    if url.startswith(("http://", "https://")):
+        return url
+    if "://" in url or ":" in url.split("/", 1)[0]:
+        raise ValueError(f"Unsupported URL scheme: {url.split(':', 1)[0]}")
+    return f"https://{url}"
 
 
 class StoboClient:
-    DEFAULT_USER_AGENT = "stobo-cli/0.3.5"
+    DEFAULT_USER_AGENT = "stobo-cli/0.3.7"
 
     def __init__(
         self,
         api_key: str | None = None,
         base_url: str = "https://api.trystobo.com",
         user_agent: str | None = None,
+        source: str = "cli",
     ):
         self.base_url = base_url.rstrip("/")
         headers: dict[str, str] = {
             "User-Agent": user_agent or self.DEFAULT_USER_AGENT,
+            "X-Audit-Source": source,
         }
         if api_key:
             headers["X-API-Key"] = api_key

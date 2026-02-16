@@ -16,9 +16,11 @@ console = Console()
 @app.command()
 def login(
     ctx: typer.Context,
-    api_key: str = typer.Argument(..., help="Your Stobo API key (sk_...)"),
+    api_key: str = typer.Option(None, "--api-key", "-k", help="Your Stobo API key (sk_...)"),
 ) -> None:
     """Save and validate an API key."""
+    if not api_key:
+        api_key = typer.prompt("API key (sk_...)", hide_input=True)
     # Use base_url from parent context (respects --base-url flag)
     parent_client: StoboClient = ctx.obj["client"]
     client = StoboClient(api_key=api_key, base_url=parent_client.base_url)
@@ -46,7 +48,7 @@ def status(ctx: typer.Context) -> None:
     """Show current auth status."""
     key = config.get_api_key()
     if not key:
-        console.print("[yellow]Not logged in.[/] Run [bold]stobo auth login <key>[/]")
+        console.print("[yellow]Not logged in.[/] Run [bold]stobo auth login[/]")
         raise typer.Exit(1)
 
     client: StoboClient = ctx.obj["client"]
@@ -55,7 +57,7 @@ def status(ctx: typer.Context) -> None:
         console.print(f"[green]\u2713[/] Authenticated")
         console.print(f"  Email: [bold]{user.get('email', 'N/A')}[/]")
         console.print(f"  Name:  {user.get('full_name', 'N/A')}")
-        console.print(f"  Key:   {key[:12]}...")
+        console.print(f"  Key:   {key[:8]}...")
     except AuthError:
-        console.print("[red]\u2717[/] Stored key is invalid. Run [bold]stobo auth login <key>[/]")
+        console.print("[red]\u2717[/] Stored key is invalid. Run [bold]stobo auth login[/]")
         raise typer.Exit(1)

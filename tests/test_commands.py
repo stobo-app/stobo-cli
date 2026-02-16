@@ -27,8 +27,9 @@ def _invoke(args: list[str], api_key: str = "sk_test") -> object:
 
 
 def test_version():
+    from stobo import __version__
     result = _invoke(["--version"])
-    assert "0.3.4" in result.output
+    assert __version__ in result.output
 
 
 def test_help():
@@ -45,7 +46,7 @@ def test_auth_login():
         instance = MockClient.return_value
         instance.get_me.return_value = SAMPLE_ME
         with patch("stobo.config.set_api_key") as mock_save:
-            result = runner.invoke(app, ["auth", "login", "sk_new_key"])
+            result = runner.invoke(app, ["auth", "login", "--api-key", "sk_new_key"])
             assert result.exit_code == 0
             assert "Logged in" in result.output
             mock_save.assert_called_once_with("sk_new_key")

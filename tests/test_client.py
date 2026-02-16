@@ -12,6 +12,7 @@ from stobo.client import (
     RateLimitError,
     ServerError,
     StoboClient,
+    normalize_url,
 )
 from fixtures import SAMPLE_AUDIT, SAMPLE_CREDITS, SAMPLE_JOB, SAMPLE_LLMS_TXT, SAMPLE_ROBOTS_TXT, SAMPLE_SITE_AUDIT, SAMPLE_TONE
 
@@ -190,3 +191,39 @@ def test_generate_robots_txt(client):
     assert result["domain"] == "scorejam.ai"
     assert result["new_score"] == 25
     assert "GPTBot" in result["crawlers_added"]
+
+
+# ── normalize_url ──────────────────────────────────────────────────
+
+
+class TestNormalizeUrl:
+    def test_adds_https(self):
+        assert normalize_url("example.com") == "https://example.com"
+
+    def test_preserves_https(self):
+        assert normalize_url("https://example.com") == "https://example.com"
+
+    def test_preserves_http(self):
+        assert normalize_url("http://example.com") == "http://example.com"
+
+    def test_strips_whitespace(self):
+        assert normalize_url("  example.com  ") == "https://example.com"
+
+    def test_empty_string(self):
+        assert normalize_url("") == ""
+
+    def test_rejects_file(self):
+        with pytest.raises(ValueError, match="Unsupported URL scheme"):
+            normalize_url("file:///etc/passwd")
+
+    def test_rejects_ftp(self):
+        with pytest.raises(ValueError, match="Unsupported URL scheme"):
+            normalize_url("ftp://example.com")
+
+    def test_rejects_javascript(self):
+        with pytest.raises(ValueError, match="Unsupported URL scheme"):
+            normalize_url("javascript:alert(1)")
+
+    def test_rejects_data(self):
+        with pytest.raises(ValueError, match="Unsupported URL scheme"):
+            normalize_url("data:text/html,<h1>hi</h1>")
