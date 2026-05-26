@@ -1,5 +1,7 @@
 # Stobo CLI
 
+> ⚠️ **Retired (May 2026).** The Stobo SEO/AEO audit service has been shut down and its API is no longer available. This package no longer performs audits — running any command prints a retirement notice and exits. Published versions remain installable for archival purposes only. Thank you to everyone who used it.
+
 AI-powered SEO/AEO audit tool for the terminal. Audit websites, extract brand voice, generate llms.txt files, and optimize content — all from the command line.
 
 ## Install

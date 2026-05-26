@@ -4,15 +4,15 @@ build-backend = "hatchling.build"
 
 [project]
 name = "stobo"
-version = "0.3.7"
-description = "Stobo CLI — AI-powered SEO/AEO audit tool"
+version = "0.4.0"
+description = "Stobo CLI — retired (the Stobo SEO/AEO audit service was shut down in 2026)"
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
 authors = [{name = "Stobo", email = "hello@trystobo.com"}]
 keywords = ["seo", "aeo", "audit", "ai", "cli", "content-optimization"]
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 7 - Inactive",
     "Environment :: Console",
     "Intended Audience :: Developers",
     "Topic :: Internet :: WWW/HTTP",
@@ -20,10 +20,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
 ]
 dependencies = [
-    "typer[all]>=0.9.0",
-    "httpx>=0.27.0",
-    "rich>=13.0.0",
-    "pydantic>=2.4.0",
+    "typer>=0.9.0",
 ]
 
 [project.optional-dependencies]
